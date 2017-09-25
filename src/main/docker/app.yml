@@ -1,0 +1,15 @@
+version: '2'
+services:
+    testhipster-app:
+        image: testhipster
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:oracle:thin:@testhipster-oracle:1521:testHipster
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+            - SPRING_DATA_ELASTICSEARCH_CLUSTER_NODES=testhipster-elasticsearch:9300
+        ports:
+            - 8080:8080
+    testhipster-elasticsearch:
+        extends:
+            file: elasticsearch.yml
+            service: testhipster-elasticsearch
